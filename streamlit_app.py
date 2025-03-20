@@ -3,19 +3,12 @@ import json
 import random
 import streamlit as st
 
-# 1) Import and load .env
-from dotenv import load_dotenv
-load_dotenv()  # Reads .env file and loads environment variables
-
-# 2) Retrieve key from environment
-API_KEY = os.getenv("OPENAI_API_KEY")
-if not API_KEY:
-    st.error("OpenAI API key not found in environment. Make sure .env is set correctly.")
-    st.stop()
+# Access the OpenAI API key from the secrets
+api_key = st.secrets["OPENAI_API_KEY"]
 
 # 3) Use your custom OpenAI class
 from openai import OpenAI
-client = OpenAI(api_key=API_KEY)
+client = OpenAI(api_key=api_key)
 
 # --------------------------------------
 # 2. Helper Functions (Same as Original, but no repeated generation)
